@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class HomeScreenPage extends StatefulWidget {
   const HomeScreenPage({super.key});
@@ -8,62 +12,124 @@ class HomeScreenPage extends StatefulWidget {
 }
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
+  File? _image;
+  final ImagePicker _imagePicker = ImagePicker();
+  Future<void> pickedImageGallery() async {
+    final XFile? profilePhotoGallery = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+    if (profilePhotoGallery != null) {
+      setState(() {
+        _image = File(profilePhotoGallery.path);
+      });
+    }
+    Navigator.pop(context);
+  }
+
+  Future<void> pickedImageCamera() async {
+    final XFile? profilePhotoCamera = await _imagePicker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 80,
+    );
+    if (profilePhotoCamera != null) {
+      setState(() {
+        _image = File(profilePhotoCamera.path);
+      });
+      Navigator.pop(context);
+    }
+  }
+
+  void pickedImage() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: Icon(Icons.camera_alt),
+            title: Text("Camera"),
+            onTap: pickedImageCamera,
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_library_outlined),
+            title: Text("Gallery"),
+            onTap: pickedImageGallery,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFDAC6C2),
+        backgroundColor: Color(0xFFFCFCFC),
         title: Center(
           child: Text(
             "App Bar",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu, color: Colors.black, size: 22),
-        ),
-        actions: [
-          IconButton(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
             onPressed: () {},
-            icon: Icon(Icons.search, color: Colors.black, size: 22),
+            icon: Icon(Icons.menu, color: Colors.black, size: 22),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notification_important_outlined, color: Colors.black, size: 22),
+        ),
+
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.notification_add, color: Colors.black, size: 22),
+            ),
+          ),
+          GestureDetector(
+            onTap: pickedImage,
+            child: CircleAvatar(
+              radius: 60,
+              backgroundImage: _image != null ? FileImage(_image!) : null,
+              child: _image == null ? Icon(Icons.person, size: 20) : null,
+            ),
           ),
         ],
       ),
-      backgroundColor: Color(0xFFA1A1A1),
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          height: 250,
-          width: 270,
-          decoration: BoxDecoration(
-            color: Color(0xFFB9A4A0),
-            border: Border(
-              top: BorderSide(color: Colors.red, width: 3),
-              bottom: BorderSide(color: Colors.orange, width: 3),
-              left: BorderSide(color: Colors.deepPurpleAccent, width: 3),
-              right: BorderSide(color: Colors.blueAccent, width: 3),
+      backgroundColor: Color(0xFFF0EBEB),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "Enter text",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                //Expanded(child: Icon(Icons.))
+              ],
+            ),
+
+          ),
+
+          Card(
+            elevation: 10,
+            color: Colors.orange,
+            child: SizedBox(
+              height: 80,
+              width: 100,
             ),
           ),
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Navigation Bar Down",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
-              Icon(Icons.arrow_downward, size: 25, color: Colors.black),
-            ],
-          ),
-        ),
+          Image.asset("asset/ima.jpg"),
+        ],
       ),
     );
   }
