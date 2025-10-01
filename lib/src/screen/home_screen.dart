@@ -127,8 +127,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         backgroundColor: Color(0xFFFCFCFC),
         title: Center(
           child: Text(
-            "App Bar",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            "CoderAngoan App",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
         leading: Padding(
