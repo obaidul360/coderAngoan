@@ -1,3 +1,4 @@
+import 'package:coder/src/provider/carousel_slide.dart';
 import 'package:coder/src/provider/info_provider.dart';
 import 'package:coder/src/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => InfoProvider()),
+        ChangeNotifierProvider(create: (_) => CarouselSliderProvider()),
       ],
       child: MyApp(),
     ),

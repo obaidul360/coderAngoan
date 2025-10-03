@@ -23,9 +23,16 @@ class DetailScreen extends StatelessWidget {
             fontSize: 28,
           ),
         ),
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios_new_rounded,size: 25,color: Colors.indigo,)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 25,
+            color: Colors.indigo,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -33,11 +40,11 @@ class DetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Lecture: ${product.lectuer}.",
+              "Lecture No: ${product.lectuer}.",
               style: const TextStyle(fontSize: 18),
             ),
             Text(
-              "Title: ${product.topic}.",
+              "Lecture Topic: ${product.topic}.",
               style: const TextStyle(fontSize: 18),
             ),
             Text(

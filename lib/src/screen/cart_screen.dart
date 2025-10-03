@@ -10,12 +10,9 @@ class CartScreenPage extends StatefulWidget {
 class _CartScreenPageState extends State<CartScreenPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Cart Page"),),);
+    return Scaffold(appBar: AppBar(title: Text("Cart Page")));
   }
 }
-
-
-
 
 /*
 import 'dart:io';
@@ -130,4 +127,3 @@ Widget build(BuildContext context) {
 }
 }
 */
-
