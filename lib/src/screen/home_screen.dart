@@ -83,28 +83,90 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu, color: Colors.black, size: 22),
-          ),
-        ),
-
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notification_add, color: Colors.black, size: 22),
+            icon: Icon(Icons.notification_add, color: Colors.black, size: 20),
           ),
           GestureDetector(
             onTap: pickedImage,
             child: CircleAvatar(
-              radius: 50,
+              radius: 30,
               backgroundImage: _image != null ? FileImage(_image!) : null,
               child: _image == null ? Icon(Icons.person, size: 20) : null,
             ),
           ),
         ],
+      ),
+      //Drawer Code Start
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            // Drawer Header Part
+            Container(
+              height: 150,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage("asset/obaidul.jpg"),
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            SizedBox(height: 6,),
+            Column(
+              spacing: 2,
+              children: [
+                Text(
+                  "MD. Obaidul Islam",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Color(0xFF615653),
+                  ),
+                ),
+                Text(
+                  "Flutter Developer",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF615653),
+                  ),
+                ),
+                Text(
+                  "obdcse360@gmail.com",
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
+                ),
+              ],
+            ),
+            Divider(),
+            // Drawer list items
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.pop(context); // Drawer বন্ধ করবে
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("Profile"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       backgroundColor: Color(0xFFF0EBEB),
       body: Column(
